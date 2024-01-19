@@ -1,6 +1,9 @@
+import { FiLoader } from "react-icons/fi";
 const Loader = () => {
   return (
-    <div>Loader</div>
+    <div>
+      <FiLoader />
+    </div>
   )
 }
 
