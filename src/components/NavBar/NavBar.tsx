@@ -1,24 +1,30 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import { HiOutlineMenuAlt3 } from "react-icons/hi";
 const NavBar = () => {
+  const [toggleMenu, setToggleMenu] = useState(false);
+  const handleNavbar = () => setToggleMenu(!toggleMenu);
   return (
     <div className="navbar">
       <div className="flex-1">
-        <Link to="/" className="btn btn-ghost text-xl">READUP</Link>
+        <Link to="/" className="btn btn-ghost text-xl">
+          READUP
+        </Link>
       </div>
       <div className="flex-none gap-2">
-        
         <div className="dropdown dropdown-end">
           <div
             tabIndex={0}
             role="button"
             className="btn btn-ghost btn-circle avatar"
           >
-            <div className="w-10 rounded-full">
-              <img
-                alt="Tailwind CSS Navbar component"
-                src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
-              />
-            </div>
+            <button
+              type="button"
+              className="navbar-toggler-btn"
+              onClick={handleNavbar}
+            >
+              <HiOutlineMenuAlt3 size={36} />
+            </button>
           </div>
           <ul
             tabIndex={0}
