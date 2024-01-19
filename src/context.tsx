@@ -4,7 +4,7 @@ const URL = "https://openlibrary.org/search.json?title=";
 const AppContext = React.createContext();
 const AppProvider = ({ children }) => {
     const [searchTerm, setSearchTerm] = useState("search");
-    const [books, setBooks] = useState(true);
+    const [books, setBooks] = useState([]);
     const [loading, setLoading] = useState(true);
     const [resultTitle, setResultTitle] = useState("");
 
@@ -15,7 +15,6 @@ const AppProvider = ({ children }) => {
             const data = await response.json();
             console.log(data)
             const { docs } = data;
-            console.log(docs);
 
             if (docs) {
                 const newBooks = docs.slice(0, 20).map((bookSingle) => {
