@@ -1,8 +1,10 @@
-import { FiLoader } from "react-icons/fi";
 const Loader = () => {
   return (
     <div>
-      <FiLoader />
+      <button className="btn">
+  <span className="loading loading-spinner"></span>
+  loading
+</button>
     </div>
   )
 }
