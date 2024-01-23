@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AppContext } from "../../Context";
+import LoginImg from "../../assets/images/LoginImg.jpeg"
 
 export default function Login() {
   const { setIsLoggedIn } = useContext(AppContext);
@@ -45,7 +46,8 @@ export default function Login() {
 
   return (
     <>
-      <div className="flex justify-center items-center bg-cover h-screen">
+      <div className="flex justify-center items-center bg-cover h-screen"
+      style={{ backgroundImage: `url(${LoginImg})` }}>
         <form
           className="bg-white bg-opacity-90 shadow-md rounded-md px-8 pt-6 pb-8 mb-4"
           onSubmit={handleSubmit}

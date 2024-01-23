@@ -1,5 +1,7 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import LoginImg from "../../assets/images/LoginImg.jpeg";
+import NavBar from "../../components/NavBar/NavBar";
 
 interface FormData {
   email: string;
@@ -52,7 +54,9 @@ const Register: React.FC = () => {
       fetch("http://localhost:3000/users")
         .then((res) => res.json())
         .then((users) => {
-          const emailExists = users.some((user) => user.email === formData.email);
+          const emailExists = users.some(
+            (user) => user.email === formData.email
+          );
 
           if (emailExists) {
             setError({ email: "This email is already registered" });
@@ -87,7 +91,11 @@ const Register: React.FC = () => {
 
   return (
     <>
-      <div className="flex justify-center items-center bg-black h-screen">
+      <NavBar />
+      <div
+        className="flex justify-center items-center bg-black h-screen"
+        style={{ backgroundImage: `url(${LoginImg})` }}
+      >
         <form
           className="bg-white shadow-md rounded-md px-8 pt-6 pb-8 mb-4"
           onSubmit={handleSubmit}
@@ -106,7 +114,10 @@ const Register: React.FC = () => {
           <div>
             {error && (
               <p className="text-red-500">
-                {error.firstName || error.lastName || error.email || error.password}
+                {error.firstName ||
+                  error.lastName ||
+                  error.email ||
+                  error.password}
               </p>
             )}
           </div>
@@ -135,13 +146,16 @@ const Register: React.FC = () => {
             onChange={handleChange}
           />
           <button
-            className="w-full bg-grey hover:bg-gray-400 text-black font-bold py-2 px-4 rounded"
+            className="w-full bg-gray-200 hover:bg-gray-400 text-black font-bold py-2 px-4 rounded"
             type="submit"
           >
             Create Account
           </button>
           <p className="text-center">
-            If you have an account, Please <Link to="/Login" className="text-black">Login</Link>{" "}
+            If you have an account, Please{" "}
+            <Link to="/Login" className="text-black">
+              Login
+            </Link>{" "}
           </p>
         </form>
       </div>
@@ -150,4 +164,3 @@ const Register: React.FC = () => {
 };
 
 export default Register;
-
