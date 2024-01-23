@@ -1,12 +1,22 @@
-import { useGlobalContext } from "../../context";
+import { useGlobalContext } from "../../Context";
 import Loading from "../Loader/Loader";
 import cover from "../../assets/images/cover.jpg";
 import Book from "../BookList/Book";
+import NavBar from "../NavBar/NavBar";
 
-const BookList = () => {
+interface BookListProps {
+  id: string;
+  cover_id: string;
+  title: string;
+  author: string[];
+  edition_count: number;
+  first_publish_year: number;
+}
+
+const BookList: React.FC = () => {
   const { books, loading, resultTitle } = useGlobalContext();
 
-  const booksWithCovers = books.map((singleBook) => {
+  const booksWithCovers: BookListProps[] = books.map((singleBook) => {
     return {
       ...singleBook,
       id: singleBook.id.replace("/works/", ""),
@@ -19,18 +29,21 @@ const BookList = () => {
   if (loading) return <Loading />;
 
   return (
-    <section className="booklist">
-      <div className="container">
-        <div className="section-title">
-          <h2>{resultTitle}</h2>
+    <>
+      <NavBar />
+      <section className="booklist">
+        <div className="container">
+          <div className="section-title">
+            <h2>{resultTitle}</h2>
+          </div>
+          <div className="booklist-content grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+            {booksWithCovers.slice(0, 30).map((item, index) => (
+              <Book key={index} {...item} />
+            ))}
+          </div>
         </div>
-        <div className="booklist-content grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-          {booksWithCovers.slice(0, 30).map((item, index) => (
-            <Book key={index} {...item} />
-          ))}
-        </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 };
 

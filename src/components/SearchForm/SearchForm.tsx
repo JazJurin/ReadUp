@@ -1,27 +1,32 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import { useGlobalContext } from "../../context";
-export default function SearchForm() {
+import { useGlobalContext } from "../../Context";
+
+const SearchForm: React.FC = () => {
   const { setSearchTerm, setResultTitle } = useGlobalContext();
-  const searchText = useRef("");
+  const searchText = useRef<HTMLInputElement | null>(null);
   const navigate = useNavigate();
 
-  useEffect(() => searchText.current.focus(), []);
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    if (searchText.current) searchText.current.focus();
+  }, []);
+
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    const tempSearchTerm = searchText.current.value.trim();
+    const tempSearchTerm = searchText.current?.value.trim() || "";
+
     if (tempSearchTerm.replace(/[^\w\s]/gi, "").length === 0) {
       setSearchTerm("My book...");
       setResultTitle("Please Enter Something ...");
     } else {
-      setSearchTerm(searchText.current.value);
+      setSearchTerm(tempSearchTerm);
     }
 
     navigate("/book");
   };
 
   return (
-    <div className="form-control" onSubmit={handleSubmit}>
+    <form className="form-control" onSubmit={handleSubmit}>
       <input
         type="text"
         placeholder="My book"
@@ -35,6 +40,9 @@ export default function SearchForm() {
       >
         SEARCH MY BOOK
       </button>
-    </div>
+    </form>
   );
-}
+};
+
+export default SearchForm;
+

@@ -1,0 +1,41 @@
+{
+  "users": [
+    {
+      "email": "jazjurin@iclud.com",
+      "firstName": "Jazmin",
+      "lastName": "Jurin",
+      "password": "Samerr",
+      "id": 1
+    },
+    {
+      "email": "jazjurin@iclud.com",
+      "password": "Samerr",
+      "id": 2
+    },
+    {
+      "email": "tema@gmail.com",
+      "password": "msdja",
+      "id": 3
+    },
+    {
+      "email": "jazjurin",
+      "password": "kjansf",
+      "id": 4
+    },
+    {
+      "email": "tema@gmail.com",
+      "password": "navjdib",
+      "id": 5
+    },
+    {
+      "email": "tema@gmail.com",
+      "password": "nafji",
+      "id": 6
+    },
+    {
+      "email": "tema@gmail.com",
+      "password": "jskndbg",
+      "id": 7
+    }
+  ]
+}

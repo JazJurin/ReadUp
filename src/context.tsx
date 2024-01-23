@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import React, { useState, useContext, useEffect } from "react";
 import { useCallback } from "react";
 const URL = "https://openlibrary.org/search.json?title=";
@@ -7,6 +8,7 @@ const AppProvider = ({ children }) => {
     const [books, setBooks] = useState([]);
     const [loading, setLoading] = useState(true);
     const [resultTitle, setResultTitle] = useState("");
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     const fetchBooks = useCallback(async () => {
         setLoading(true);
@@ -46,13 +48,17 @@ const AppProvider = ({ children }) => {
         }
     }, [searchTerm]);
 
+    const login = () => {
+        setIsLoggedIn(true); 
+      };
+
     useEffect(() => {
         fetchBooks();
     }, [searchTerm, fetchBooks]);
 
     return (
         <AppContext.Provider value={{
-            loading, books, setSearchTerm, resultTitle, setResultTitle
+            loading, books, setSearchTerm, resultTitle, setResultTitle, login, isLoggedIn, setIsLoggedIn
         }}>
             {children}
         </AppContext.Provider>

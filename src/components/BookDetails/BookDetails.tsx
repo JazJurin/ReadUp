@@ -3,11 +3,21 @@ import { useNavigate, useParams } from "react-router-dom";
 import Loading from "../Loader/Loader";
 import cover from "../../assets/images/cover.jpg";
 
+interface BookDetailsProps {
+  description: string;
+  title: string;
+  cover_img: string;
+  subject_places: string;
+  subject_times: string;
+  subjects: string;
+}
+
 const URL = "https://openlibrary.org/works/";
-const BookDetails = () => {
+
+const BookDetails: React.FC = () => {
   const { id } = useParams();
-  const [loading, setLoading] = useState(false);
-  const [book, setBook] = useState(null);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [book, setBook] = useState<BookDetailsProps | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -25,7 +35,7 @@ const BookDetails = () => {
             subject_times,
             subjects,
           } = data;
-          const newBook = {
+          const newBook: BookDetailsProps = {
             description: description
               ? description.value
               : "No description found",
@@ -47,13 +57,13 @@ const BookDetails = () => {
         }
         setLoading(false);
       } catch (error) {
-        console.log(error);
+        console.error(error);
         setLoading(false);
       }
     }
     getBookDetails();
   }, [id]);
-  console.log(book);
+
   if (loading) return <Loading />;
 
   return (
@@ -69,27 +79,26 @@ const BookDetails = () => {
         <p>Subjects: {book?.subjects}</p>
       </div>
       <div className="flex items-center justify-center">
-  <button
-    className="btn btn-circle btn-outline"
-    onClick={() => navigate("/book")}
-  >
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      className="h-6 w-6"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        d="M6 18L18 6M6 6l12 12"
-      />
-    </svg>
-  </button>
-</div>
-
+        <button
+          className="btn btn-circle btn-outline"
+          onClick={() => navigate("/book")}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      </div>
     </div>
   );
 };
